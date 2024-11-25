@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from 'react'
 import FloatingImageCard from '@/components/floating-image-card'
 import { Button } from "@/components/ui/button"
+import camera from "@/components/camera"
 
 
 export default function Home() {
