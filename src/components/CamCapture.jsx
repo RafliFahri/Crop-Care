@@ -1,47 +1,7 @@
 import { useState, useRef } from "react";
 
-// import styled from "styled-components";
 import {Button} from "@/components/ui/button";
 import {CameraIcon, X} from "lucide-react";
-
-// Define styled components for styling
-/*
-const WebcamContainer = styled.div`
-  position: relative;
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-`;
-
-const WebcamVideo = styled.video`
-  width: 100%;
-  border-radius: 10px;
-`;
-
-const PreviewImg = styled.img`
-  width: 100%;
-  border-radius: 10px;
-`;
-
-const WebcamCanvas = styled.canvas`
-  display: none; /!* Hide canvas by default *!/
-`;
-
-const WebcamButton = styled.button`
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #fff;
-  color: #333;
-  border: none;
-  border-radius: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
-*/
 
 const WebcamCapture = () => {
   const videoRef = useRef(null);
@@ -51,6 +11,7 @@ const WebcamCapture = () => {
   const [capturedImage, setCapturedImage] = useState(null);
 
   const startWebcam = async () => {
+    console.log(videoRef.current);
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: true,
@@ -71,6 +32,8 @@ const WebcamCapture = () => {
         track.stop();
       });
       setMediaStream(null);
+      videoRef.current.srcObject = null;
+      console.log(videoRef.current);
     }
   };
 
@@ -107,16 +70,14 @@ const WebcamCapture = () => {
     startWebcam(); // Stop the webcam if it's active
     setCapturedImage(null); // Reset captured image
   };
+  const stopState = () => {
+    stopWebcam(); // Stop the webcam if it's active
+    setCapturedImage(null); // Reset captured image
+  };
 
   const predictState = () => {
-    stopWebcam(); // Stop the webcam if it's active
-    // Sent image to be Predicted by ML model and Redirect to homepage to get result of image
+    // You can do something with the captured image here, like save it to state or send it to a server
   };
-  const stopDong = () => {
-    stopWebcam(); // Stop the webcam if it's active
-    // Sent image to be Predicted by ML model and Redirect to homepage to get result of image
-  };
-
   return (
     <div className="relative w-full max-w-md mt-0 mb-0 ml-auto mr-auto bg-white">
       {capturedImage ? (
@@ -131,13 +92,14 @@ const WebcamCapture = () => {
         <div className="w-full min-h-screen border border-red-950 content-center">
           <video className="w-full" ref={videoRef} autoPlay muted />
           <canvas className="hidden" ref={canvasRef} />
-          <Button onClick={stopDong} className="absolute top-8 right-8 p-3 rounded-full">
+          <Button onClick={stopState} className="absolute top-8 right-8 p-3 rounded-full">
             <X/>
           </Button>
           <div className="absolute w-full min-h-32 border border-blue-800 bottom-0 bg-black bg-opacity-35 items-center justify-center flex">
-            {!videoRef.current ? (
+            {!videoRef.current || !videoRef.current.srcObject ? (
               <Button onClick={startWebcam} className="rounded-full">
-                <CameraIcon/>
+                nyaladogn
+                {/*<CameraIcon/>*/}
               </Button>
             ) : (
               <Button onClick={captureImage} className="rounded-full">
