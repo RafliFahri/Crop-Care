@@ -1,10 +1,10 @@
 'use client';
 
 import Image from "next/image";
-import { useState } from 'react'
-import FloatingImageCard from '@/components/floating-image-card'
-import { Button } from "@/components/ui/button"
-import camera from '@/components/camera'
+import { useState } from 'react';
+import FloatingImageCard from '@/components/floating-image-card';
+import { Button } from "@/components/ui/button";
+import Camera from '@/components/camera';
 
 
 export default function Home() {
@@ -16,15 +16,11 @@ export default function Home() {
         <p className="text-xl text-gray-600">
           Web Based Machine Learning for Image detection of Cassava and Maize disease
         </p>
-        <Button
-          size="lg"
-          onClick={() => setShowCard(true)}
-          className="mt-8"
-        >
+        <Button size="lg" onClick={() => setShowCard(true)} className="mt-8">
           Deteksi Penyakit
         </Button>
-      </div>
 
+      </div>
       {showCard && <FloatingImageCard onClose={() => setShowCard(false)} />}
     </main>
   )
