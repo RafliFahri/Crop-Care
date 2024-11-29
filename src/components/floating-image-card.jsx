@@ -9,7 +9,7 @@ import CameraComponent from "@/components/camera-component";
 
 const FloatingImageCard = ({onClose}) => {
   const [selectedImage, setSelectedImage] = useState(null);
-  const [isCameraComponentVisible, setIsCameraComponentVisible] = useState(false);
+  const [isCameraShow, setIsCameraShow] = useState(false);
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
@@ -23,19 +23,18 @@ const FloatingImageCard = ({onClose}) => {
   const handleCameraUse = () => {
     // Implement camera functionality here
     console.log("Camera button clicked");
-    setIsCameraComponentVisible(true);
+    setIsCameraShow(true);
   }
   const handleCloseCamera = () => {
     // Implement camera functionality here
     console.log("Camera Close");
-    setIsCameraComponentVisible(false);
+    setIsCameraShow(false);
   }
 
   return (
     (
       // <div className="relative">
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          {isCameraComponentVisible && <CameraComponent className="z-30" onClose={() => handleCloseCamera} />}
           <Card className="w-80 shadow-lg relative">
           <button
             onClick={onClose}
@@ -72,6 +71,7 @@ const FloatingImageCard = ({onClose}) => {
             </div>
           </CardContent>
         </Card>
+        { isCameraShow && <CameraComponent className="z-30" onClose={() => setIsCameraShow(false)} /> }
       </div>
     // </div>
     )
