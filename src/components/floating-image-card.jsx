@@ -1,43 +1,45 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Upload, Camera, X, AlertCircle } from 'lucide-react'
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import CameraComponent from "@/components/camera-component"
+import { useState } from 'react';
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Upload, Camera, X, AlertCircle } from 'lucide-react';
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import CameraComponent from "@/components/camera-component";
 
 const FloatingImageCard = ({ onClose }) => {
-  const [selectedImage, setSelectedImage] = useState(null)
-  const [isCameraShow, setIsCameraShow] = useState(false)
-  const [showWarning, setShowWarning] = useState(false)
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [isCameraShow, setIsCameraShow] = useState(false);
+  const [showWarning, setShowWarning] = useState(false);
 
   const handleFileUpload = (event) => {
-    const file = event.target.files[0]
+    const file = event.target.files[0];
     if (file) {
-      const reader = new FileReader()
+      const reader = new FileReader();
       reader.onload = (e) => {
-        setSelectedImage(e.target.result)
-        setShowWarning(false)
-      }
-      reader.readAsDataURL(file)
+        setSelectedImage(e.target.result);
+        setShowWarning(false);
+      };
+      reader.readAsDataURL(file);
     }
-  }
+  };
 
   const handleCameraUse = () => {
-    console.log("Camera button clicked")
-    setIsCameraShow(true)
-  }
+    setIsCameraShow(true);
+  };
+
+  const handleCapture = (image) => {
+    setSelectedImage(image);
+    setIsCameraShow(false);
+  };
 
   const handleDeteksi = () => {
     if (!selectedImage) {
-      setShowWarning(true)
+      setShowWarning(true);
     } else {
-      // Proceed with detection logic
-      console.log("Detecting disease in the uploaded image")
-      // Add your detection logic here
+      console.log("Detecting disease in the uploaded image");
     }
-  }
+  };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
@@ -96,10 +98,11 @@ const FloatingImageCard = ({ onClose }) => {
           )}
         </CardContent>
       </Card>
-      {isCameraShow && <CameraComponent onClose={() => setIsCameraShow(false)} />}
+      {isCameraShow && (
+        <CameraComponent onClose={() => setIsCameraShow(false)} onCapture={handleCapture} />
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default FloatingImageCard
-
+export default FloatingImageCard;
