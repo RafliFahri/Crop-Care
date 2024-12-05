@@ -288,46 +288,46 @@ export default function Home() {
     <div className="row gy-4">
       <div className="col-lg-4" data-aos="fade-up" data-aos-delay={100}>
         <div className="content px-xl-5">
-          <h3><span>Frequently Asked </span><strong>Questions</strong></h3>
+          <h3><span>Frequently Asked </span><strong>What is the relationship between cassava and corn in agriculture?</strong></h3>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+          Cassava and corn are often planted together in an intercropping system. Corn helps provide shade for cassava in the early stages of growth, while cassava can still grow well despite having a longer harvest cycle.
           </p>
         </div>
       </div>
       <div className="col-lg-8" data-aos="fade-up" data-aos-delay={200}>
         <div className="faq-container">
           <div className="faq-item faq-active">
-            <h3><span className="num">1.</span> <span>Non consectetur a erat nam at lectus urna duis?</span></h3>
+            <h3><span className="num">1.</span> <span>What type of soil is suitable for planting cassava and corn?</span></h3>
             <div className="faq-content">
-              <p>Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.</p>
+              <p>These two plants are suitable for planting in loose soil, on the outskirts of the city, and have good drainage to prevent waterlogging.</p>
             </div>
             <i className="faq-toggle bi bi-chevron-right" />
           </div>{/* End Faq item*/}
           <div className="faq-item faq-active">
-            <h3><span className="num">2.</span> <span>Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque?</span></h3>
+            <h3><span className="num">2.</span> <span>How to deal with pests that attack corn and cassava?</span></h3>
             <div className="faq-content">
-              <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
+              <p>Use organic or chemical pesticides as needed. Cassava is often affected by mites, while corn is susceptible to armyworms.</p>
             </div>
             <i className="faq-toggle bi bi-chevron-right" />
           </div>{/* End Faq item*/}
           <div className="faq-item faq-active">
-            <h3><span className="num">3.</span> <span>Dolor sit amet consectetur adipiscing elit pellentesque?</span></h3>
+            <h3><span className="num">3.</span> <span> Can cassava and corn be planted together?</span></h3>
             <div className="faq-content">
-              <p>Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis</p>
+              <p>Yes, both can be planted together using the intercropping method, as long as the planting distance is arranged so that they do not compete with each other.</p>
             </div>
             <i className="faq-toggle bi bi-chevron-right" />
           </div>{/* End Faq item*/}
           <div className="faq-item faq-active">
-            <h3><span className="num">4.</span> <span>Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?</span></h3>
+            <h3><span className="num">4.</span> <span>How long does it take to harvest?</span></h3>
             <div className="faq-content">
-              <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
+              <p>Cassava is usually harvested in 9-12 months, while corn can be harvested in 3-4 months.</p>
             </div>
             <i className="faq-toggle bi bi-chevron-right" />
           </div>{/* End Faq item*/}
           <div className="faq-item faq-active">
-            <h3><span className="num">5.</span> <span>Tempus quam pellentesque nec nam aliquam sem et tortor consequat?</span></h3>
+            <h3><span className="num">5.</span> <span>What is the best fertilizer for cassava and corn?</span></h3>
             <div className="faq-content">
-              <p>Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in</p>
+              <p>Compost or manure is very good for growth, combined with NPK fertilizer for maximum results.</p>
             </div>
             <i className="faq-toggle bi bi-chevron-right" />
           </div>{/* End Faq item*/}
