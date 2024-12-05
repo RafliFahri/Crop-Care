@@ -1,15 +1,7 @@
 {
   "compilerOptions": {
     "paths": {
-<<<<<<< HEAD
-      "@/*": ["./*"]
-=======
-<<<<<<< HEAD
       "@/*": ["./src/*"]
-=======
-      "@/*": ["./*"]
->>>>>>> f9fd571 (Initial commit from Create Next App)
->>>>>>> e71ee78d06041f3b754220100f49eebeede89651
     }
   }
 }
