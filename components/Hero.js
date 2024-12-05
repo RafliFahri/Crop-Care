@@ -6,12 +6,11 @@ const Hero = () => {
 
   const startScan = () => {
     setIsScanVisible(true);
-    navigator.mediaDevices.getUserMedia({ video: true })
-      .then((stream) => {
-        setVideoStream(stream);
-      }).catch((error) => {
-        console.error("Failed to access camera:", error);
-      });
+    navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+      setVideoStream(stream);
+    }).catch((error) => {
+      console.error('Failed to access camera:', error);
+    });
   };
 
   const stopScan = () => {
@@ -31,7 +30,8 @@ const Hero = () => {
             <p>An AI-based plant disease detection application...</p>
           </div>
           <div className="col-lg-6">
-            <img src="/assets/user/img/bg1.png" className="img-fluid" alt="Plant" />
+            <img src="/assets/user/img/bg1.png" className="img-fluid"
+                 alt="Plant"/>
           </div>
         </div>
         <div className="icon-boxes">
@@ -42,7 +42,8 @@ const Hero = () => {
                   <i className="bi bi-camera"></i>
                 </div>
                 <h4 className="title">
-                  <a href="#" className="stretched-link" onClick={startScan}>Scan</a>
+                  <a href="#" className="stretched-link"
+                     onClick={ startScan }>Scan</a>
                 </h4>
               </div>
             </div>
@@ -50,13 +51,15 @@ const Hero = () => {
         </div>
       </div>
 
-      {isScanVisible && (
+      { isScanVisible && (
         <div>
-          <video id="videoPreview" width="100%" height="300" autoPlay playsInline />
-          <button onClick={stopScan}>Close Camera</button>
-          <button onClick={() => alert('Prediction clicked')}>Prediksi</button>
+          <video id="videoPreview" width="100%" height="300" autoPlay
+                 playsInline/>
+          <button onClick={ stopScan }>Close Camera</button>
+          <button onClick={ () => alert('Prediction clicked') }>Prediksi
+          </button>
         </div>
-      )}
+      ) }
     </section>
   );
 };
