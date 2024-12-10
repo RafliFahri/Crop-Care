@@ -1,15 +1,36 @@
 "use server";
 import * as tf from "@tensorflow/tfjs-node"
-const cassavaModelURL = "https://storage.googleapis.com/crop-care-model/cassava/model.json";
-const maizeModelURL = "https://storage.googleapis.com/crop-care-model/maize/model.json";
+const modelURL = {
+  cassava: "https://storage.googleapis.com/crop-care-model/cassava/model.json",
+  maize: "https://storage.googleapis.com/crop-care-model/maize/model.json"
+};
+// const maizeModelURL = "https://storage.googleapis.com/crop-care-model/maize/model.json";
 
-let model = {}
+const models = {}
 
-async function loadModels(type) {
-  model[cassava] = await tf.load(cassavaModelURL);
-  model[maize] = await tf.load(cassavaModelURL);
+async function loadModel(type) {
+  if (!models[type]) {
+    console.log(`Loading model: ${type}`);
+    models[type] = await tf.loadLayersModel(modelURL[type]);
+    console.log(`Model ${type} loaded successfully`);
+  }
+  // model[cassava] = await tf.loadLayersModel(cassavaModelURL);
+  // model[maize] = await tf.loadLayersModel(maizeModelURL);
 
-  return model;
+  return models[type];
 }
 
-export default loadModels;
+async function loadAllModels() {
+  await Promise.all([loadModel(cassava), loadModel(maize)]);
+  console.log("Model has been loaded");
+  
+}
+
+function getModel(type) {
+  if (!models[type]) {
+    throw new Error(`Model ${type} has not been loaded`);
+  }
+  return models[type];
+}
+
+exports = { loadAllModels, getModel };
