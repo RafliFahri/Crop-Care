@@ -2,7 +2,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { CameraIcon, X, Trash } from "lucide-react";
-
 const CameraComponent = ({ onClose, onCapture }) => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
@@ -63,31 +62,31 @@ const CameraComponent = ({ onClose, onCapture }) => {
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50">
       <div className="relative w-full max-w-3xl">
         <div className="relative overflow-hidden">
-          { capturedImage ? (
-          <>
-            <img src={ capturedImage } className="w-full h-full object-cover"/>
-            <Button onClick={ resetState } className="absolute top-4 right-4 p-3 rounded-full bg-white text-black hover:bg-gray-200">
-              <Trash/>
-            </Button>
-            <Button onClick={ handleClose } className="absolute bottom-4 left-1/2 transform -translate-x-1/2 p-3 rounded-full bg-green-500 text-white hover:bg-green-600">
-              Predict
-            </Button>
-          </>)
-          : (
-          <>
-            <video ref={ videoRef } autoPlay muted
-                   className="w-full h-full object-cover"/>
-            <canvas ref={ canvasRef } className="hidden"/>
-            <Button onClick={ handleClose } className="absolute top-4 right-4 p-3 rounded-full bg-white text-black hover:bg-gray-200">
-              <X/>
-            </Button>
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-              <Button onClick={ captureImage } className="p-3 rounded-full bg-blue-500 text-white hover:bg-blue-600">
-                <CameraIcon/>
+          {capturedImage ? (
+            <>
+              <img src={capturedImage} className="w-full h-full object-cover" />
+              <Button onClick={resetState} className="absolute top-4 right-4 p-3 rounded-full bg-white text-black hover:bg-gray-200">
+                <Trash />
               </Button>
-            </div>
-          </>
-          ) }
+              <Button onClick={handleClose} className="absolute bottom-4 left-1/2 transform -translate-x-1/2 p-3 rounded-full bg-green-500 text-white hover:bg-green-600">
+                Predict
+              </Button>
+            </>)
+            : (
+              <>
+                <video ref={videoRef} autoPlay muted
+                  className="w-full h-full object-cover" />
+                <canvas ref={canvasRef} className="hidden" />
+                <Button onClick={handleClose} className="absolute top-4 right-4 p-3 rounded-full bg-white text-black hover:bg-gray-200">
+                  <X />
+                </Button>
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                  <Button onClick={captureImage} className="p-3 rounded-full bg-blue-500 text-white hover:bg-blue-600">
+                    <CameraIcon />
+                  </Button>
+                </div>
+              </>
+            )}
         </div>
       </div>
     </div>

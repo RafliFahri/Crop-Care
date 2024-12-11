@@ -1,137 +1,193 @@
-'use client';
-import { useState, useEffect } from 'react';
-import FloatingImageCard from '@/components/floating-image-card';
+"use client";
+
+import { useState, useEffect } from "react";
+import FloatingImageCard from "@/components/floating-image-card";
 import { Button } from "@/components/ui/button";
-// import { loadAllModels } from "@/pages/api/loadModels.js";
+// Import AOS library
+import AOS from "aos";
+import "aos/dist/aos.css"; // Import the AOS styles
 
 export default function Home() {
   const [showCard, setShowCard] = useState(false);
-  // const [data, setData] = useState(null);
-  // async function getAllCharacters() {
-  //   const data = await fetch("api")
-    
-  //   if (!data.ok) {
-  //     throw new Error('Failed to fetch data')
-  //   }
-  //   console.log("Model already load");
-  //   return data.json()
-  // }
-  // useEffect(() => {
-  //   const api = getAllCharacters();
-  //   // setData(api)
-  // }, []);
+
+  useEffect(() => {
+    // Initialize AOS when the component mounts
+    AOS.init({
+      duration: 1000, // Animation duration
+      easing: 'ease-out', // Easing function
+      once: true, // Animation happens once
+    });
+  }, []);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <div className="text-center space-y-4 max-w-3xl">
-        <h1 className="text-6xl font-bold">Crop-Care</h1>
-        <p className="text-xl text-gray-600">
-          Web Based Machine Learning for Image detection of Cassava and Maize disease
-        </p>
-        <Button size="lg" onClick={() => setShowCard(true)} className="mt-8">
-          Deteksi Penyakit
-        </Button>
+    <div className="min-h-screen bg-[#f5f8f5]">
+      {/* Header */}
+      <header className="border-b bg-white sticky top-0 z-50">
+        <div className="container mx-auto px-4 py-4 flex items-center space-x-3">
+          <img
+            src="../assets/user/img/logo.png"
+            alt="Crop-Care Logo"
+            className="h-10 w-auto ml-6"
+          />
+          <span className="text-2xl font-bold text-gray-700 ml-6">Crop-Care</span>
+        </div>
+      </header>
 
-      </div>
+      {/* Hero Section */}
+      <main className="container mx-auto px-4 py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="space-y-6">
+            <h1
+              className="text-4xl md:text-5xl font-bold tracking-tight ml-7"
+              data-aos="fade-up" // Add AOS attribute for animation
+            >
+              Crop-Care
+            </h1>
+            <p
+              className="text-base md:text-xl text-gray-600 leading-relaxed max-w-xl ml-7"
+              data-aos="fade-up" // Add AOS attribute for animation
+            >
+              An AI-based plant disease detection application that helps farmers identify diseases
+              quickly and accurately through leaf images, supporting early prevention and increasing
+              crop yields.
+            </p>
+
+            <Button
+              onClick={() => setShowCard(true)}
+              className="bg-green-600 hover:bg-green-700 text-white px-6 py-4 md:px-8 md:py-6 text-sm md:text-lg rounded-full ml-7"
+              data-aos="fade-up" // Add AOS attribute for animation
+            >
+              Predict
+            </Button>
+          </div>
+          <div className="hidden lg:block relative" data-aos="fade-left"> {/* Add AOS attribute for animation */}
+            <div className="absolute inset-0 bg-green-600/10 rounded-full blur-3xl"></div>
+            <img
+              src="assets/user/img/bg1.png"
+              alt="Crop-Care Hero"
+              className="relative w-full max-w-[300px] md:max-w-[400px] mx-auto"
+            />
+          </div>
+        </div>
+
+        {/* Who We Are Section */}
+        <section className="mt-16 bg-white py-12 md:py-16 shadow-md">
+          <div className="px-4 md:px-16">
+            <h2
+              className="text-sm font-semibold text-gray-500 mb-2"
+              data-aos="fade-up" // Add AOS attribute for animation
+            >
+              WHO WE ARE
+            </h2>
+            <h3
+              className="text-2xl md:text-3xl font-bold tracking-tight mb-6"
+              data-aos="fade-up" // Add AOS attribute for animation
+            >
+              Unleashing Potential with Creative Strategy
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+              {/* Left Text Content */}
+              <div className="space-y-6" data-aos="fade-up"> {/* Add AOS attribute for animation */}
+                <p className="text-gray-600 leading-relaxed">
+                  Plant diseases pose a serious challenge to global food security, often causing
+                  reduced crop yields and financial losses for farmers. Traditional diagnosis,
+                  which relies on expert visual inspection, is often slow and prone to errors.
+                </p>
+                <p className="text-gray-600 leading-relaxed">
+                  Machine learning, especially deep learning, now offers a solution by detecting
+                  patterns and symptoms of plant diseases through extensive image datasets. This
+                  technology enables farmers to monitor crops quickly and accurately, helping to
+                  prevent outbreaks at an early stage. As a result, crop yields can be improved,
+                  supporting global food security amid growing challenges.
+                </p>
+              </div>
+              {/* Right Image Content */}
+              <div className="grid grid-cols-2 gap-4" data-aos="fade-up"> {/* Add AOS attribute for animation */}
+                <img
+                  src="../assets/user/img/about1.png"
+                  alt="Cassava"
+                  className="w-full rounded-lg object-cover"
+                />
+                <img
+                  src="../assets/user/img/about2.png"
+                  alt="QR Scanning"
+                  className="w-full rounded-lg object-cover"
+                />
+                <img
+                  src="../assets/user/img/about3.png"
+                  alt="Corn"
+                  className="w-full rounded-lg object-cover mt-[-4rem] md:mt-[-15rem]"
+                  style={{ gridColumn: "2", gridRow: "2" }}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Features Section */}
+        <section className="mt-16">
+          <h2 className="text-xl md:text-2xl font-semibold text-green-600 mb-8 text-center" data-aos="fade-up">
+            Check Our <span className="font-bold">Features</span>
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8" data-aos="fade-up">
+            <div className="flex justify-center">
+              <img src="../assets/user/img/features.png" alt="Feature Image" className="w-3/4 md:w-full rounded-lg" />
+            </div>
+            <div className="space-y-4" data-aos="fade-up">
+              {["Increase in crop yields", "Early detection", "Epidemic prevention", "Support for global food security"].map(
+                (feature, index) => (
+                  <div key={index} className="flex items-center space-x-4">
+                    <div className="bg-green-600 text-white p-3 md:p-4 rounded-full">✓</div>
+                    <p className="text-sm md:text-lg">{feature}</p>
+                  </div>
+                )
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="mt-16 bg-white py-12 md:py-16 shadow-md">
+          <h2 className="text-3xl font-bold text-center mb-8" data-aos="fade-up"> {/* Add AOS attribute for animation */}
+            Frequently Asked Questions
+          </h2>
+          <div className="space-y-6">
+            <div className="bg-white p-6 rounded-lg shadow-lg" data-aos="fade-up">
+              <h3 className="text-lg font-semibold text-green-500 cursor-pointer">1. What type of soil is suitable for planting cassava and corn?</h3>
+              <p className="text-gray-600 mt-2">These two plants are suitable for planting in loose soil, on the outskirts of the city, and have good drainage to prevent waterlogging.</p>
+            </div>
+
+            <div className="bg-white p-6 rounded-lg shadow-lg" data-aos="fade-up">
+              <h3 className="text-lg font-semibold text-green-500 cursor-pointer">2. How to deal with pests that attack corn and cassava?</h3>
+              <p className="text-gray-600 mt-2">Use organic or chemical pesticides as needed. Cassava is often affected by mites, while corn is susceptible to armyworms.</p>
+            </div>
+
+            <div className="bg-white p-6 rounded-lg shadow-lg" data-aos="fade-up">
+              <h3 className="text-lg font-semibold text-green-500 cursor-pointer">3. Can cassava and corn be planted together?</h3>
+              <p className="text-gray-600 mt-2">Yes, both can be planted together using the intercropping method, as long as the planting distance is arranged so that they do not compete with each other.</p>
+            </div>
+
+            <div className="bg-white p-6 rounded-lg shadow-lg" data-aos="fade-up">
+              <h3 className="text-lg font-semibold text-green-500 cursor-pointer">4. How long does it take to harvest?</h3>
+              <p className="text-gray-600 mt-2">Cassava is usually harvested in 9-12 months, while corn can be harvested in 3-4 months.</p>
+            </div>
+
+            <div className="bg-white p-6 rounded-lg shadow-lg" data-aos="fade-up">
+              <h3 className="text-lg font-semibold text-green-500 cursor-pointer">5. What is the best fertilizer for cassava and corn?</h3>
+              <p className="text-gray-600 mt-2">Compost or manure is very good for growth, combined with NPK fertilizer for maximum results.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-white border-t py-8 mt-16 text-center text-gray-600">
+        <p>© 2024 Crop-Care. All Rights Reserved.</p>
+      </footer>
+
+      {/* Floating Image Card */}
       {showCard && <FloatingImageCard onClose={() => setShowCard(false)} />}
-    </main>
-  )
+    </div>
+  );
 }
-//   return (
-//     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-//       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-//         <Image
-//           className="dark:invert"
-//           src="/next.svg"
-//           alt="Next.js logo"
-//           width={180}
-//           height={38}
-//           priority
-//         />
-//         <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-//           <li className="mb-2">
-//             Get started by editing{" "}
-//             <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-//               src/app/page.js
-//             </code>
-//             .
-//           </li>
-//           <li>Save and see your changes instantly.</li>
-//         </ol>
-
-//         <div className="flex gap-4 items-center flex-col sm:flex-row">
-//           <a
-//             className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-//             href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-//             target="_blank"
-//             rel="noopener noreferrer"
-//           >
-//             <Image
-//               className="dark:invert"
-//               src="/vercel.svg"
-//               alt="Vercel logomark"
-//               width={20}
-//               height={20}
-//             />
-//             Deploy now
-//           </a>
-//           <a
-//             className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-//             href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-//             target="_blank"
-//             rel="noopener noreferrer"
-//           >
-//             Read our docs
-//           </a>
-//         </div>
-//       </main>
-//       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-//         <a
-//           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-//           href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           <Image
-//             aria-hidden
-//             src="/file.svg"
-//             alt="File icon"
-//             width={16}
-//             height={16}
-//           />
-//           Learn
-//         </a>
-//         <a
-//           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-//           href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           <Image
-//             aria-hidden
-//             src="/window.svg"
-//             alt="Window icon"
-//             width={16}
-//             height={16}
-//           />
-//           Examples
-//         </a>
-//         <a
-//           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-//           href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           <Image
-//             aria-hidden
-//             src="/globe.svg"
-//             alt="Globe icon"
-//             width={16}
-//             height={16}
-//           />
-//           Go to nextjs.org →
-//         </a>
-//       </footer>
-//       <FloatingImageCard />
-//     </div>
-//   );
-// }
