@@ -34,12 +34,43 @@ const FloatingImageCard = ({ onClose }) => {
     setIsCameraShow(false);
   };
 
-  const handleDeteksi = () => {
+  const handleDeteksi = async () => {
     if (!selectedImage) {
       setShowWarning(true)
     } else if (!selectedPlant) {
       setShowWarning(true)
     } else {
+      // Convert image data URL to binary
+      const imageBuffer = Buffer.from(selectedImage.split(",")[1], "base64");
+      const formData = new FormData(); 
+      formData.append("image", imageBuffer);
+      formData.append("type", "cassava");
+      try {
+        let response = await fetch('/api', {
+          method: 'POST',
+          body: formData,
+        });
+        response = await response.json()
+        // alert(`${response.name} ${response.age} ${response.city}`)
+        console.log(response);
+      } catch (error) {
+        console.error('Error submitting form:', error);
+      }
+      // try {
+  
+      //   // Call the prediction action
+      //   const result = await fetch("api", {
+      //     method: "POST",
+      //     body: "formData",
+      //   });
+      //   // const result = await predictAction(imageBuffer, "cassava"); // Change to "maize" as needed
+      //   setPredictionResult(result.message);
+      // } catch (error) {
+      //   console.error("Prediction failed:", error);
+      //   setPredictionResult("Gagal memproses prediksi.");
+      // } finally {
+      //   setLoading(false);
+      // }
       // Proceed with detection logic
       console.log(`Detecting disease in the uploaded ${selectedPlant} image`)
       // Add your detection logic here
@@ -99,7 +130,7 @@ const FloatingImageCard = ({ onClose }) => {
             <input
               id="fileInput"
               type="file"
-              accept="image/*"
+              accept="image/jpg"
               className="hidden"
               onChange={handleFileUpload}
             />
