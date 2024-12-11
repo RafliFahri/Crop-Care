@@ -1,29 +1,29 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Upload, Camera, X, AlertCircle, Leaf } from 'lucide-react'
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import CameraComponent from "@/components/camera-component"
+import { useState } from 'react';
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Upload, Camera, X, AlertCircle, Leaf } from 'lucide-react';
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import CameraComponent from "@/components/camera-component";
 
 const FloatingImageCard = ({ onClose }) => {
-  const [selectedImage, setSelectedImage] = useState(null)
-  const [isCameraShow, setIsCameraShow] = useState(false)
-  const [showWarning, setShowWarning] = useState(false)
-  const [selectedPlant, setSelectedPlant] = useState(null)
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [isCameraShow, setIsCameraShow] = useState(false);
+  const [showWarning, setShowWarning] = useState(false);
+  const [selectedPlant, setSelectedPlant] = useState(null);
 
   const handleFileUpload = (event) => {
-    const file = event.target.files[0]
+    const file = event.target.files[0];
     if (file) {
-      const reader = new FileReader()
+      const reader = new FileReader();
       reader.onload = (e) => {
-        setSelectedImage(e.target.result)
-        setShowWarning(false)
-      }
-      reader.readAsDataURL(file)
+        setSelectedImage({ dataURL: e.target.result, file });
+        setShowWarning(false);
+      };
+      reader.readAsDataURL(file);
     }
-  }
+  };
 
   const handleCameraUse = () => {
     setIsCameraShow(true);
@@ -35,52 +35,36 @@ const FloatingImageCard = ({ onClose }) => {
   };
 
   const handleDeteksi = async () => {
-    if (!selectedImage) {
-      setShowWarning(true)
-    } else if (!selectedPlant) {
-      setShowWarning(true)
-    } else {
-      // Convert image data URL to binary
-      const imageBuffer = Buffer.from(selectedImage.split(",")[1], "base64");
-      const formData = new FormData(); 
-      formData.append("image", imageBuffer);
-      formData.append("type", "cassava");
-      try {
-        let response = await fetch('/api', {
-          method: 'POST',
-          body: formData,
-        });
-        response = await response.json()
-        // alert(`${response.name} ${response.age} ${response.city}`)
-        console.log(response);
-      } catch (error) {
-        console.error('Error submitting form:', error);
-      }
-      // try {
-  
-      //   // Call the prediction action
-      //   const result = await fetch("api", {
-      //     method: "POST",
-      //     body: "formData",
-      //   });
-      //   // const result = await predictAction(imageBuffer, "cassava"); // Change to "maize" as needed
-      //   setPredictionResult(result.message);
-      // } catch (error) {
-      //   console.error("Prediction failed:", error);
-      //   setPredictionResult("Gagal memproses prediksi.");
-      // } finally {
-      //   setLoading(false);
-      // }
-      // Proceed with detection logic
-      console.log(`Detecting disease in the uploaded ${selectedPlant} image`)
-      // Add your detection logic here
+    if (!selectedImage || !selectedPlant) {
+      setShowWarning(true);
+      return;
     }
-  }
+
+    const formData = new FormData();
+    formData.append("image", selectedImage.file); // Kirim file asli
+    formData.append("type", selectedPlant.toLowerCase());
+
+    try {
+      const response = await fetch('/api', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error('Prediction API error');
+      }
+
+      const result = await response.json();
+      console.log('Prediction Result:', result);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  };
 
   const handlePlantSelection = (plant) => {
-    setSelectedPlant(plant)
-    setShowWarning(false)
-  }
+    setSelectedPlant(plant);
+    setShowWarning(false);
+  };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
@@ -130,7 +114,7 @@ const FloatingImageCard = ({ onClose }) => {
             <input
               id="fileInput"
               type="file"
-              accept="image/jpg"
+              accept="image/*"
               className="hidden"
               onChange={handleFileUpload}
             />
@@ -159,8 +143,7 @@ const FloatingImageCard = ({ onClose }) => {
       </Card>
       {isCameraShow && <CameraComponent onClose={() => setIsCameraShow(false)} onCapture={handleCapture} />}
     </div>
-  )
-}
+  );
+};
 
-export default FloatingImageCard
-
+export default FloatingImageCard;
