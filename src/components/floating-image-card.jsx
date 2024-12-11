@@ -36,20 +36,38 @@ const FloatingImageCard = ({ onClose }) => {
   const handleDeteksi = async () => {
     if (!selectedImage) {
       setShowWarning(true);
-    } 
-
-    try {
+    } else {
       // Convert image data URL to binary
       const imageBuffer = Buffer.from(selectedImage.split(",")[1], "base64");
-
-      // Call the prediction action
-      const result = await predictAction(imageBuffer, "cassava"); // Change to "maize" as needed
-      setPredictionResult(result.message);
-    } catch (error) {
-      console.error("Prediction failed:", error);
-      setPredictionResult("Gagal memproses prediksi.");
-    } finally {
-      setLoading(false);
+      const formData = new FormData(); 
+      formData.append("image", imageBuffer);
+      formData.append("type", "cassava");
+      try {
+        let response = await fetch('/api', {
+          method: 'POST',
+          body: formData,
+        });
+        response = await response.json()
+        // alert(`${response.name} ${response.age} ${response.city}`)
+        console.log(response);
+      } catch (error) {
+        console.error('Error submitting form:', error);
+      }
+      // try {
+  
+      //   // Call the prediction action
+      //   const result = await fetch("api", {
+      //     method: "POST",
+      //     body: "formData",
+      //   });
+      //   // const result = await predictAction(imageBuffer, "cassava"); // Change to "maize" as needed
+      //   setPredictionResult(result.message);
+      // } catch (error) {
+      //   console.error("Prediction failed:", error);
+      //   setPredictionResult("Gagal memproses prediksi.");
+      // } finally {
+      //   setLoading(false);
+      // }
     }
   };
 
@@ -85,7 +103,7 @@ const FloatingImageCard = ({ onClose }) => {
             <input
               id="fileInput"
               type="file"
-              accept="image/*"
+              accept="image/jpg"
               className="hidden"
               onChange={handleFileUpload}
             />
@@ -96,7 +114,7 @@ const FloatingImageCard = ({ onClose }) => {
             >
               <Camera className="mr-2 h-4 w-4" /> Use Camera
             </Button>
-            <Button variant="default" className="w-full" onClick={handleDeteksi}>
+            <Button variant="default" className="w-full" onClick={handleDeteksi} type="submit">
               Prediksi
             </Button>
           </div>

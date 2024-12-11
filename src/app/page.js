@@ -4,38 +4,24 @@ import FloatingImageCard from '@/components/floating-image-card';
 import { Button } from "@/components/ui/button";
 // import { loadAllModels } from "@/pages/api/loadModels.js";
 
-async function getAllCharacters() {
-  const data = await fetch("api/predict")
-
-  if (!data.ok) {
-    throw new Error('Failed to fetch data')
-  }
-
-  return data.json()
-}
-
 export default function Home() {
   const [showCard, setShowCard] = useState(false);
-  const [data, setData] = useState(null);
-  useEffect(() => {
-    const api = getAllCharacters();
-    setData(api)
-    // Load semua model sekali ketika komponen pertama kali di-render
-    // const loadModels = async () => {
-    //   try {
-    //     await loadAllModels();
-    //     console.log("Models loaded successfully");
-    //   } catch (error) {
-    //     console.error("Error loading models:", error);
-    //   }
-    // };
-
-    // loadModels();
-  }, []);
+  // const [data, setData] = useState(null);
+  // async function getAllCharacters() {
+  //   const data = await fetch("api")
+    
+  //   if (!data.ok) {
+  //     throw new Error('Failed to fetch data')
+  //   }
+  //   console.log("Model already load");
+  //   return data.json()
+  // }
+  // useEffect(() => {
+  //   const api = getAllCharacters();
+  //   // setData(api)
+  // }, []);
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
-    {data}
-
       <div className="text-center space-y-4 max-w-3xl">
         <h1 className="text-6xl font-bold">Crop-Care</h1>
         <p className="text-xl text-gray-600">

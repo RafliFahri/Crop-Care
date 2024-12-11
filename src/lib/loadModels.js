@@ -11,12 +11,24 @@ async function loadModel(type) {
     console.log(`Loading model: ${type}`);
     // models[type] = await tf.loadLayersModel(modelURL[type]);
     models[type] = await tf.loadGraphModel("file://model/model.json");
+    // models[type].summary();
     console.log(`Model ${type} loaded successfully`);
   }
   return models[type];
 }
 
-// await loadModel();
+async function ensureModelLoaded() {
+  try {
+    if (!models[type]) {
+      await loadAllModels();
+      console.log("Models loaded successfully.");
+    }
+    console.log("Models have been load");
+  } catch (error) {
+    console.error("Error loading models:", error);
+    throw error;
+  }
+}  
 
 export async function loadAllModels() {
   await Promise.all([loadModel("cassava"), loadModel("maize")]);
