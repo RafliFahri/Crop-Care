@@ -26,9 +26,13 @@ const FloatingImageCard = ({ onClose }) => {
   }
 
   const handleCameraUse = () => {
-    console.log("Camera button clicked")
-    setIsCameraShow(true)
-  }
+    setIsCameraShow(true);
+  };
+
+  const handleCapture = (image) => {
+    setSelectedImage(image);
+    setIsCameraShow(false);
+  };
 
   const handleDeteksi = () => {
     if (!selectedImage) {
@@ -122,7 +126,7 @@ const FloatingImageCard = ({ onClose }) => {
           )}
         </CardContent>
       </Card>
-      {isCameraShow && <CameraComponent onClose={() => setIsCameraShow(false)} />}
+      {isCameraShow && <CameraComponent onClose={() => setIsCameraShow(false)} onCapture={handleCapture} />}
     </div>
   )
 }
