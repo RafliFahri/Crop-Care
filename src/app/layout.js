@@ -15,6 +15,9 @@ const geistMono = localFont({
 export const metadata = {
   title: "Crop Care",
   description: "Web Based Machine Learning for Image detection of Cassava and Maize disease",
+  icons: {
+    icon: 'assets/user/img/logo.png',
+  },
 };
 
 export default function RootLayout({ children }) {
