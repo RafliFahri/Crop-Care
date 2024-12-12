@@ -103,7 +103,7 @@ export async function predictAction(imageBuffer, modelType) {
       : `Tanaman terdeteksi sakit dengan penyakit ${sickness}.`;
 
     return {
-        isHealthy: isHealthy,
+        isSehat: isHealthy,
         penyakit: isHealthy ? null : sickness,
         saran: suggest,
         pesan: resultMessage,
