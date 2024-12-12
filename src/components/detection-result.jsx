@@ -49,7 +49,7 @@ export function DetectionResult({
         {!isHealthy && treatment && (
           <div className="text-center p-4 bg-blue-50 rounded-lg">
             <h3 className="font-semibold text-lg mb-2 text-blue-800">Saran Perawatan:</h3>
-            <p className="text-blue-700">{treatment}</p>
+            {treatment.map(element => <p className="text-blue-700">{element}</p> )}
           </div>
         )}
       </CardContent>

@@ -24,7 +24,15 @@ export default function Home() {
     });
   }, []);
 
-  
+  useEffect(()=>{
+    console.log(predictionResult);
+    if (predictionResult) {
+      console.log(predictionResult.isSehat);
+      console.log(predictionResult.penyakit);
+      console.log(predictionResult.saran);
+      console.log(predictionResult.pesan);
+    }
+  }, [predictionResult]);
 
   return (
     <div className="min-h-screen bg-[#f5f8f5]">
@@ -66,10 +74,6 @@ export default function Home() {
             >
               Predict
             </Button>
-            {selectedImage && predictionResult && <DetectionResult imageUrl={selectedImage/*"?height=400&width=400"*/} isHealthy={false}
-              disease="Bercak Daun (Leaf Spot)" treatment="1. Buang daun yang terinfeksi. 2. Aplikasikan fungisida berbahan aktif mankozeb. 3. Pastikan sirkulasi udara yang baik di sekitar tanaman."
-            />}
-            
           </div>
           <div className="hidden lg:block relative" data-aos="fade-left"> {/* Add AOS attribute for animation */}
             <div className="absolute inset-0 bg-green-600/10 rounded-full blur-3xl"></div>
@@ -79,6 +83,9 @@ export default function Home() {
               className="relative w-full max-w-[300px] md:max-w-[400px] mx-auto"
             />
           </div>
+          {selectedImage && predictionResult && <DetectionResult imageUrl={selectedImage} isHealthy={predictionResult.isSehat}
+            disease={predictionResult.penyakit} treatment={predictionResult.saran}
+          />}
         </div>
 
         {/* Who We Are Section */}
