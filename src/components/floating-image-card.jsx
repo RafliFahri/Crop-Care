@@ -18,7 +18,9 @@ const FloatingImageCard = ({ onClose }) => {
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
+        // setSelectedImage(e.target.result)
         setSelectedImage({ dataURL: e.target.result, file });
+        console.log(file);
         setShowWarning(false);
       };
       reader.readAsDataURL(file);
@@ -32,6 +34,7 @@ const FloatingImageCard = ({ onClose }) => {
   const handleCapture = (image) => {
     setSelectedImage(image);
     setIsCameraShow(false);
+    setShowWarning(false);
   };
 
   const handleDeteksi = async () => {
@@ -55,9 +58,9 @@ const FloatingImageCard = ({ onClose }) => {
       }
 
       const result = await response.json();
-      console.log('Prediction Result:', result);
+      console.log(result);
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.log(error);
     }
   };
 
@@ -79,7 +82,7 @@ const FloatingImageCard = ({ onClose }) => {
         <CardContent className="p-6">
           {selectedImage && (
             <img
-              src={selectedImage}
+              src={selectedImage.dataURL}
               alt="Uploaded"
               className="w-full h-40 object-cover mb-4 rounded"
             />
@@ -114,7 +117,7 @@ const FloatingImageCard = ({ onClose }) => {
             <input
               id="fileInput"
               type="file"
-              accept="image/*"
+              accept="image/png"
               className="hidden"
               onChange={handleFileUpload}
             />

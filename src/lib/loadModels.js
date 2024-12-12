@@ -1,27 +1,40 @@
 import * as tf from "@tensorflow/tfjs-node";
+
+// If using env please uncomment an object with value process.env.* and
+// comment an object with value GCS public URL
 const modelURL = {
-  cassava: "https://storage.googleapis.com/crop-care-model/cassava/model.json",
-  maize: "https://storage.googleapis.com/crop-care-model/maize/model.json"
+  // singkong: process.env.MODEL_URL_MAIZE,
+  // jagung: process.env.MODEL_URL_MAIZE
+  singkong: "https://storage.googleapis.com/crop-care-model/cassava/model.json",
+  // jagung: "https://storage.googleapis.com/crop-care-model/maize/model.json"
+};
+const backupFile = {
+  singkong: "file://model/cassava/model.json",
+  jagung: "file://model/cassava/model.json"
 };
 
-const models = {}
+const models = {};
 
 async function loadModel(type) {
-  if (!models[type]) {
+  try {
     console.log(`Loading model: ${type}`);
-    // models[type] = await tf.loadLayersModel(modelURL[type]);
-    models[type] = await tf.loadGraphModel("file://model/model.json");
+    console.log(modelURL[type]||backupFile[type]);
+    models[type] = await tf.loadLayersModel(modelURL[type]||backupFile[type]);
     // models[type].summary();
     console.log(`Model ${type} loaded successfully`);
+  } catch (err) {
+    console.error(err)
+    throw new Error("Model file is corrupted or unsupport");
   }
-  return models[type];
 }
 
-async function ensureModelLoaded() {
+async function ensureModelLoaded(type=null) {
   try {
-    if (!models[type]) {
+    if (!models) {
       await loadAllModels();
       console.log("Models loaded successfully.");
+    } else if (!models[type]) {
+      await loadModel(type);
     }
     console.log("Models have been load");
   } catch (error) {
@@ -31,13 +44,13 @@ async function ensureModelLoaded() {
 }  
 
 export async function loadAllModels() {
-  await Promise.all([loadModel("cassava"), loadModel("maize")]);
+  await Promise.all([loadModel("singkong"), loadModel("jagung")]);
   console.log("Model has been loaded");
 }
 
 export async function getModel(type) {
-  if (!models[type]) {
-    throw new Error(`Model ${type} has not been loaded`);
-  }
+  await ensureModelLoaded(type)
   return models[type];
 }
+
+await loadAllModels();

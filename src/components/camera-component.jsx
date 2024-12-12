@@ -7,6 +7,7 @@ const CameraComponent = ({ onClose, onCapture }) => {
   const canvasRef = useRef(null);
   const [mediaStream, setMediaStream] = useState(null);
   const [capturedImage, setCapturedImage] = useState(null);
+  const [fileImage, setfileImage] = useState(null);
 
   useEffect(() => {
     startWebcam();
@@ -40,10 +41,20 @@ const CameraComponent = ({ onClose, onCapture }) => {
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
-      const imageDataUrl = canvas.toDataURL("image/jpeg");
-      setCapturedImage(imageDataUrl);
+      // const imageDataUrl = canvas.toDataURL("image/png");
+      // setCapturedImage(imageDataUrl);
       // onCapture(imageDataUrl || capturedImage);
-      stopWebcam();
+      // stopWebcam();
+      canvas.toBlob((blob) => {
+        const file = new File([blob], 'captured-image.png', { type: 'image/png' }); 
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          setCapturedImage(e.target.result); // Simpan data URL gambar 
+          setfileImage({ dataURL: e.target.result, file });
+        };
+        reader.readAsDataURL(file); 
+      }, 'image/png'); 
+      stopWebcam(); 
     }
   };
 
@@ -55,7 +66,7 @@ const CameraComponent = ({ onClose, onCapture }) => {
   const handleClose = () => {
     stopWebcam();
     onClose();
-    onCapture(capturedImage);
+    onCapture(fileImage);
   };
 
   return (
