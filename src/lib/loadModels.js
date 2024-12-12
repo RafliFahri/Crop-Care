@@ -6,11 +6,11 @@ const modelURL = {
   // singkong: process.env.MODEL_URL_MAIZE,
   // jagung: process.env.MODEL_URL_MAIZE
   singkong: "https://storage.googleapis.com/crop-care-model/cassava/model.json",
-  // jagung: "https://storage.googleapis.com/crop-care-model/maize/model.json"
+  jagung: "https://storage.googleapis.com/crop-care-model/maize/model.json"
 };
 const backupFile = {
   singkong: "file://model/cassava/model.json",
-  jagung: "file://model/cassava/model.json"
+  jagung: "file://model/maize/model.json"
 };
 
 const models = {};
