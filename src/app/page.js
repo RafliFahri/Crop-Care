@@ -83,11 +83,12 @@ export default function Home() {
               className="relative w-full max-w-[300px] md:max-w-[400px] mx-auto"
             />
           </div>
+        </div>
+        <div className="flex flex-center">
           {selectedImage && predictionResult && <DetectionResult imageUrl={selectedImage} isHealthy={predictionResult.isSehat}
             disease={predictionResult.penyakit} treatment={predictionResult.saran}
           />}
         </div>
-
         {/* Who We Are Section */}
         <section className="mt-16 bg-white py-12 md:py-16 shadow-md">
           <div className="px-4 md:px-16">
