@@ -7,7 +7,7 @@ export async function predictAction(imageBuffer, modelType) {
     console.log(modelType);
     
     // Convert the image buffer to a tensor
-    const tensor = tf.node.decodeImage(imageBuffer, 3)
+    const tensor = tf.node.decodeImage(imageBuffer)
       .resizeNearestNeighbor([224, 224])
       .expandDims()
       .toFloat()
