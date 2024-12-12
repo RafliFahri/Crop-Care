@@ -11,6 +11,9 @@ import "aos/dist/aos.css"; // Import the AOS styles
 
 export default function Home() {
   const [showCard, setShowCard] = useState(false);
+  // const [showDetectionResult, setShowDetectionResult] = useState(true);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [predictionResult, setPredictionResult] = useState(null);
 
   useEffect(() => {
     // Initialize AOS when the component mounts
@@ -20,6 +23,8 @@ export default function Home() {
       once: true, // Animation happens once
     });
   }, []);
+
+  
 
   return (
     <div className="min-h-screen bg-[#f5f8f5]">
@@ -61,9 +66,10 @@ export default function Home() {
             >
               Predict
             </Button>
-            <DetectionResult imageUrl="/placeholder.svg?height=400&width=400" isHealthy={false}
+            {selectedImage && predictionResult && <DetectionResult imageUrl={selectedImage/*"?height=400&width=400"*/} isHealthy={false}
               disease="Bercak Daun (Leaf Spot)" treatment="1. Buang daun yang terinfeksi. 2. Aplikasikan fungisida berbahan aktif mankozeb. 3. Pastikan sirkulasi udara yang baik di sekitar tanaman."
-            />
+            />}
+            
           </div>
           <div className="hidden lg:block relative" data-aos="fade-left"> {/* Add AOS attribute for animation */}
             <div className="absolute inset-0 bg-green-600/10 rounded-full blur-3xl"></div>
@@ -192,7 +198,7 @@ export default function Home() {
       </footer>
 
       {/* Floating Image Card */}
-      {showCard && <FloatingImageCard onClose={() => setShowCard(false)} />}
+      {showCard && <FloatingImageCard onClose={() => setShowCard(false)} imageResult={(image) => setSelectedImage(image)} predictionResult={(res) => setPredictionResult(res)}/>}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
@@ -7,7 +7,7 @@ import { Upload, Camera, X, AlertCircle, Leaf } from 'lucide-react';
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import CameraComponent from "@/components/camera-component";
 
-const FloatingImageCard = ({ onClose }) => {
+const FloatingImageCard = ({ onClose, imageResult, predictionResult }) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [isCameraShow, setIsCameraShow] = useState(false);
   const [showWarning, setShowWarning] = useState(false);
@@ -37,6 +37,7 @@ const FloatingImageCard = ({ onClose }) => {
     setShowWarning(false);
   };
 
+  // Tambah Loading Effect setelah hasil keluar tutup card
   const handleDeteksi = async () => {
     if (!selectedImage || !selectedPlant) {
       setShowWarning(true);
@@ -59,6 +60,9 @@ const FloatingImageCard = ({ onClose }) => {
 
       const result = await response.json();
       console.log(result);
+      imageResult(selectedImage.dataURL);
+      predictionResult(result);
+      onClose();
     } catch (error) {
       console.log(error);
     }
