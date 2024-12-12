@@ -70,7 +70,7 @@ const FloatingImageCard = ({ onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[51]">
       <Card className="w-80 shadow-lg relative">
         <button
           onClick={onClose}

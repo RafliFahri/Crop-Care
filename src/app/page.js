@@ -1,8 +1,10 @@
 "use client";
 
+// import Image from "next/image";
 import { useState, useEffect } from "react";
 import FloatingImageCard from "@/components/floating-image-card";
 import { Button } from "@/components/ui/button";
+import { DetectionResult } from '@/components/detection-result'
 // Import AOS library
 import AOS from "aos";
 import "aos/dist/aos.css"; // Import the AOS styles
@@ -59,6 +61,9 @@ export default function Home() {
             >
               Predict
             </Button>
+            <DetectionResult imageUrl="/placeholder.svg?height=400&width=400" isHealthy={false}
+              disease="Bercak Daun (Leaf Spot)" treatment="1. Buang daun yang terinfeksi. 2. Aplikasikan fungisida berbahan aktif mankozeb. 3. Pastikan sirkulasi udara yang baik di sekitar tanaman."
+            />
           </div>
           <div className="hidden lg:block relative" data-aos="fade-left"> {/* Add AOS attribute for animation */}
             <div className="absolute inset-0 bg-green-600/10 rounded-full blur-3xl"></div>
@@ -191,3 +196,6 @@ export default function Home() {
     </div>
   );
 }
+    // <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      
+    // </main>
