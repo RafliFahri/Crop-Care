@@ -40,16 +40,20 @@ export function DetectionResult({
             </Badge>
           )}
         </div>
-        {!isHealthy && disease && (
+        {!isHealthy && disease ? (
           <div className="text-center p-4 bg-red-50 rounded-lg">
             <h3 className="font-semibold text-lg mb-2 text-red-800">Penyakit Terdeteksi:</h3>
             <p className="text-red-700 font-medium">{disease}</p>
           </div>
+        ) : (
+          <div className="text-center p-4 bg-green-50 rounded-lg">
+            <h3 className="font-semibold text-lg text-green-800">Tidak Ada Penyakit Terdeteksi</h3>
+          </div>
         )}
-        {!isHealthy && treatment && (
+        {treatment && (
           <div className="text-center p-4 bg-blue-50 rounded-lg">
             <h3 className="font-semibold text-lg mb-2 text-blue-800">Saran Perawatan:</h3>
-            {treatment.map(element => <p className="text-blue-700">{element}</p> )}
+            {treatment.map((element, index) => <p className="text-blue-700" key={index}>{index+1+". "+element}</p> )}
           </div>
         )}
       </CardContent>

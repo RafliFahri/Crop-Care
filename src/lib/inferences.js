@@ -22,7 +22,7 @@ export async function predictAction(imageBuffer, modelType) {
     
     if (modelType === "singkong") {
       const [cbb, cbsd, cgm, cmd, healty] = result;
-      if (cbb > 0.5) {
+      if (cbb > 0.4) {
         sickness = "Bercak Bakteri Singkong (CBB)";
         suggest = [
           "Buang dan hancurkan tanaman yang terinfeksi.",
@@ -30,7 +30,7 @@ export async function predictAction(imageBuffer, modelType) {
           "Pastikan jarak tanam yang baik untuk sirkulasi udara yang baik."
         ];
         isHealthy = false;
-      } else if (cbsd > 0.5) {
+      } else if (cbsd > 0.4) {
         sickness = "Penyakit Garis Coklat Singkong (CBSD)";
         suggest = [
           "Buang dan hancurkan tanaman yang terinfeksi.",
@@ -38,7 +38,7 @@ export async function predictAction(imageBuffer, modelType) {
           "Lakukan rotasi tanaman untuk mencegah penumpukan penyakit di tanah."
         ];
         isHealthy = false;
-      } else if (cgm > 0.5) {
+      } else if (cgm > 0.4) {
         sickness = "Tungau Hijau Singkong (CGM)";
         suggest = [
           "Terapkan akarisida untuk mengendalikan populasi tungau.",
@@ -46,7 +46,7 @@ export async function predictAction(imageBuffer, modelType) {
           "Pelihara kebersihan ladang untuk mengurangi habitat tungau."
         ];
         isHealthy = false;
-      } else if (cmd > 0.5) {
+      } else if (cmd > 0.4) {
         sickness = "Penyakit Mozaik Singkong (CMD)";
         suggest = [
           "Gunakan bahan tanam bebas virus.",
@@ -54,7 +54,7 @@ export async function predictAction(imageBuffer, modelType) {
           "Tanam varietas singkong yang tahan."
         ];
         isHealthy = false;
-      } else if (healty > 0.5) {
+      } else {
         suggest = [
           "Pastikan tanaman mendapatkan sinar matahari yang cukup untuk fotosintesis yang optimal.",
           "Lakukan penyiraman secara teratur, terutama saat musim kemarau, agar tanah tetap lembab.",
@@ -71,7 +71,7 @@ export async function predictAction(imageBuffer, modelType) {
         isSehat: isHealthy,
         penyakit: isHealthy ? null : sickness,
         saran: suggest,
-        message: resultMessage,
+        pesan: resultMessage,
     };
   } catch (error) {
     console.error("Prediction error:", error);

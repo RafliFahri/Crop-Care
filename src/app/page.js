@@ -24,15 +24,9 @@ export default function Home() {
     });
   }, []);
 
-  useEffect(()=>{
-    console.log(predictionResult);
-    if (predictionResult) {
-      console.log(predictionResult.isSehat);
-      console.log(predictionResult.penyakit);
-      console.log(predictionResult.saran);
-      console.log(predictionResult.pesan);
-    }
-  }, [predictionResult]);
+  // useEffect(()=>{
+  //   console.log(predictionResult);
+  // }, [predictionResult]);
 
   return (
     <div className="min-h-screen bg-[#f5f8f5]">
