@@ -8,12 +8,12 @@ Crop diseases seriously threaten global food security by reducing yields and fin
 
 ```
 project-root/
-├── app/       # Request handlers for API endpoints
-├── public/            # Database schemas and models
-├── routes/            # API routes
-├── utils/             # Handle generating otp number
-├── server.js          # Main entry point of the API
-└── README.md          # Documentation file
+├── public/           # Database schemas and models
+├── src/
+├   ├── app/            # Request handlers for API endpoints
+├      ├── routes/      # API routes
+├   ├── lib/            # Handle generating otp number
+└── README.md         # Documentation file
 ```
 
 ---
