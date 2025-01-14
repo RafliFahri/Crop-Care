@@ -19,7 +19,7 @@ async function loadModel(type) {
   try {
     console.log(`Loading model: ${type}`);
     console.log(modelURL[type]||backupFile[type]);
-    models[type] = await tf.loadLayersModel(modelURL[type]||backupFile[type]);
+    models[type] = await tf.loadLayersModel(/*modelURL[type]||*/backupFile[type]);
     // models[type].summary();
     console.log(`Model ${type} loaded successfully`);
   } catch (err) {
